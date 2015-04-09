@@ -1,10 +1,10 @@
 bin_PROGRAMS = condump
-noinst_HEADERS =
+noinst_HEADERS = condump.h
 
-AM_CPPFLAGS = -I$(top_srcdir)/common/include
+COMMON_INCLUDES = -I../common/include
 
 condump_SOURCES = condump.c
-condump_CFLAGS = -W -Wall -Werror -g
-condump_CPPFLAGS = ${LIBXC_INC}
-condump_LDADD = ${LIBXC_LIB}
+condump_CFLAGS = $(COMMON_INCLUDES) -W -Wall -Werror -g
+condump_CPPFLAGS = $(COMMON_INCLUDES) $(LIBXC_INC)
+condump_LDADD = $(LIBXC_LIB)
 

@@ -13,10 +13,12 @@ install-sh
 missing
 src/Makefile
 src/Makefile.in
-src/config.h
-src/config.h.in
-src/config.h.in~
-src/stamp-h1
+src/common/include/config.h
+src/common/include/config.h.in
+src/common/include/config.h.in~
+src/common/include/stamp-h1
+
+src/condump/condump
 
 *.o
 

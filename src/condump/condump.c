@@ -1,7 +1,4 @@
-#include <stdlib.h>
-#include <string.h>
-#include <errno.h>
-#include <xenctrl.h>
+#include "condump.h"
 
 int read_console(xc_interface *xch, unsigned int ring_size)
 {
@@ -11,11 +8,7 @@ int read_console(xc_interface *xch, unsigned int ring_size)
     unsigned int n;         /* Character to be read or read when returned by xc_readconsolerin). */
     int rc = 0;
 
-    buf = malloc(buf_size);
-    if (!buf) {
-        ERR("malloc(): failed (%s).", strerror(errno));
-        abort();
-    }
+    buf = m_malloc(buf_size);
     INF("alloc'ed %dB buffer.", buf_size);
 
     n = ring_size;
@@ -35,11 +28,7 @@ int read_console(xc_interface *xch, unsigned int ring_size)
             errno = ERANGE;
             break;
         }
-        buf = realloc(buf, buf_size);
-        if (!buf) {
-            ERR("realloc(): failed (%s).", strerror(errno));
-            abort();
-        }
+        buf = m_realloc(buf, buf_size);
         INF("realloc'ed %dB buffer.", buf_size);
         rc = xc_readconsolering(xch, &buf[index], &n, 0, 1, &index);
         INF("read %dB buffer, index@%d, buf@%d", n, index, buf_size - ring_size);
@@ -56,7 +45,6 @@ int read_console(xc_interface *xch, unsigned int ring_size)
     return rc;
 }
 
-#define KB(n) ((n) * 1024)
 int main(void)
 {
     xc_interface *xch;
@@ -74,6 +62,7 @@ int main(void)
     }
 
     xc_interface_close(xch);
+
     return -rc;
 }
 

@@ -24,13 +24,14 @@ AC_SYS_LARGEFILE
 
 # Output files
 AC_CONFIG_MACRO_DIR([m4])
-AC_CONFIG_HEADERS([src/config.h])
+AC_CONFIG_HEADERS([src/common/include/config.h])
 
 ## This one doesn't have pkg-config support...
 AC_CHECK_HEADERS([xenctrl.h], [LIBXC_INC=""; LIBXC_LIB="-lxenctrl"], [AC_MSG_ERROR(["libxc required."])])
 AC_SUBST(LIBXC_INC)
 AC_SUBST(LIBXC_LIB)
 
-AC_CONFIG_FILES([Makefile 
+AC_CONFIG_FILES([Makefile
+                 src/Makefile
 	         src/condump/Makefile ])
 AC_OUTPUT
