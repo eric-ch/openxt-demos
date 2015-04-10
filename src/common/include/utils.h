@@ -2,6 +2,11 @@
 # define _UTILS_H_
 
 /*
+ * GCC warning handling.
+ */
+# define unused(var)	(void) (var);
+
+/*
  * Logging facilities.
  */
 # include <stdio.h>
@@ -66,6 +71,57 @@ static inline void *m_malloc0(size_t size)
 #define MB(n)   (KB(n) * 1024)
 
 #define ARRAY_LEN(arr)  (sizeof (arr) / sizeof ((arr)[0]))
+
+/*
+ * Error handling helpers.
+ */
+#include <errno.h>
+
+#define test_or_failret(cond, ret, fmt, ...)    \
+    if (cond) {                                 \
+        ERR(fmt, ##__VA_ARGS__);                \
+        return (ret);                           \
+    }                                           \
+
+#define test_or_failerrno(cond, fmt, ...)       \
+    if (cond) {                                 \
+        int __rc = -errno;                      \
+        ERR(fmt, ##__VA_ARGS__);                \
+        return (-__rc);                         \
+    }
+
+/*
+ * Input parsing helpers.
+ */
+#include <limits.h>
+
+static inline int parse_ul(const char *nptr, unsigned long *ul)
+{
+    char *end;
+
+    *ul = strtoul(nptr, &end, 0);
+    if (*ul == ULONG_MAX) {
+        return -ERANGE;
+    }
+    if (end == nptr) {
+        return -EINVAL;
+    }
+    return 0;
+}
+
+static inline int parse_ull(const char *nptr, unsigned long long *ull)
+{
+    char *end;
+
+    *ull = strtoull(nptr, &end, 0);
+    if (*ull == ULLONG_MAX) {
+        return -ERANGE;
+    }
+    if (end == nptr) {
+        return -EINVAL;
+    }
+    return 0;
+}
 
 #endif /* !_UTILS_H_ */
 

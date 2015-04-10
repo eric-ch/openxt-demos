@@ -19,6 +19,7 @@ src/common/include/config.h.in~
 src/common/include/stamp-h1
 
 src/condump/condump
+src/poke/poke
 
 *.o
 

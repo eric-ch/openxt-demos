@@ -33,5 +33,7 @@ AC_SUBST(LIBXC_LIB)
 
 AC_CONFIG_FILES([Makefile
                  src/Makefile
-	         src/condump/Makefile ])
+	         src/condump/Makefile
+	         src/poke/Makefile
+		 ])
 AC_OUTPUT
