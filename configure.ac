@@ -1,6 +1,10 @@
 AC_INIT([openxt-demos], [0.1])
 AM_INIT_AUTOMAKE
 
+# Libtool
+AM_PROG_AR
+LT_INIT
+
 # Check for programs
 AC_PROG_CC
 AC_PROG_INSTALL
@@ -10,7 +14,8 @@ AC_CHECK_PROG(MD5SUM, md5sum, md5sum)
 AC_CHECK_PROG(GREP, grep, grep)
 
 # Check for headers
-AC_CHECK_HEADERS([stdio.h stdlib.h string.h errno.h assert.h])
+AC_CHECK_HEADERS([stdio.h stdlib.h string.h errno.h assert.h limits.h])
+AC_CHECK_HEADERS([fcntl.h sys/io.h sys/mman.h])
 AC_HEADER_TIME
 AC_HEADER_ASSERT
 
@@ -33,6 +38,9 @@ AC_SUBST(LIBXC_LIB)
 
 AC_CONFIG_FILES([Makefile
                  src/Makefile
+                 src/common/Makefile
+                 src/common/lib/Makefile
+                 src/common/lib/pci/Makefile
 	         src/condump/Makefile
 	         src/poke/Makefile
 		 ])

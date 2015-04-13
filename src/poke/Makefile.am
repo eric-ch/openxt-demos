@@ -1,10 +1,13 @@
+COMMON_INC = -I../common/include
+COMMON_LIB = -lpci
+
+COMMON_INCLUDES = ../common/include/utils.h ../common/include/pci.h
+
 bin_PROGRAMS = poke
-noinst_HEADERS = poke.h
 
-COMMON_INCLUDES = -I../common/include
-
-poke_SOURCES = poke.c
-poke_CFLAGS = $(COMMON_INCLUDES) -W -Wall -Werror -g
-poke_CPPFLAGS = $(COMMON_INCLUDES) $(LIBXC_INC)
-poke_LDADD = $(LIBXC_LIB)
+poke_SOURCES = poke.c poke.h $(COMMON_INCLUDES)
+poke_CFLAGS = $(COMMON_INC) -W -Wall -Werror -g
+poke_CPPFLAGS = $(COMMON_INC) $(LIBXC_INC)
+poke_LDFLAGS =  -L../common/lib/pci
+poke_LDADD = $(COMMON_LIB) $(LIBXC_LIB)
 

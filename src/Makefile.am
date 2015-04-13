@@ -1,2 +1,2 @@
-SUBDIRS = condump poke
+SUBDIRS = common condump poke
 

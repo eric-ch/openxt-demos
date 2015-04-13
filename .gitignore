@@ -1,3 +1,6 @@
+INSTALL
+compile
+m4
 Makefile
 Makefile.in
 aclocal-copy/
@@ -18,11 +21,12 @@ src/common/include/config.h.in
 src/common/include/config.h.in~
 src/common/include/stamp-h1
 
+src/common/lib/pci/libpci.a
 src/condump/condump
 src/poke/poke
 
 *.o
 
-INSTALL
-compile
-
+*-libtool
+*-lib
+ltmain.sh

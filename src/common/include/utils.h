@@ -93,7 +93,7 @@ static inline void *m_malloc0(size_t size)
 /*
  * Input parsing helpers.
  */
-#include <limits.h>
+# include <limits.h>
 
 static inline int parse_ul(const char *nptr, unsigned long *ul)
 {
