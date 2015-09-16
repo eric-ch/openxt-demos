@@ -15,7 +15,8 @@ AC_CHECK_PROG(GREP, grep, grep)
 
 # Check for headers
 AC_CHECK_HEADERS([stdio.h stdlib.h string.h errno.h assert.h limits.h])
-AC_CHECK_HEADERS([fcntl.h sys/io.h sys/mman.h])
+AC_CHECK_HEADERS([fcntl.h sys/io.h sys/mman.h sys/ioctl.h getopt.h])
+AC_CHECK_HEADERS([xen/v4v.h linux/v4v_dev.h])
 AC_HEADER_TIME
 AC_HEADER_ASSERT
 

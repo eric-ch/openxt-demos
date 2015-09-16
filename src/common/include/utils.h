@@ -100,11 +100,11 @@ static inline int parse_ul(const char *nptr, unsigned long *ul)
     char *end;
 
     *ul = strtoul(nptr, &end, 0);
-    if (*ul == ULONG_MAX) {
-        return -ERANGE;
-    }
     if (end == nptr) {
         return -EINVAL;
+    }
+    if (*ul == ULONG_MAX) {
+        return -ERANGE;
     }
     return 0;
 }
@@ -114,14 +114,24 @@ static inline int parse_ull(const char *nptr, unsigned long long *ull)
     char *end;
 
     *ull = strtoull(nptr, &end, 0);
-    if (*ull == ULLONG_MAX) {
-        return -ERANGE;
-    }
     if (end == nptr) {
         return -EINVAL;
     }
+    if (*ull == ULLONG_MAX) {
+        return -ERANGE;
+    }
     return 0;
 }
+
+/*
+ * Commands handling.
+ */
+struct cmd_op {
+    const char *cmd_str;
+    const char *usage;      /* String describing the command's expected arguments. */
+    const char *desc;       /* Documentation of the command. */
+    int (*cmd)(int argc, char *argv[]);
+};
 
 #endif /* !_UTILS_H_ */
 
