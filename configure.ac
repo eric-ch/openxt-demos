@@ -44,5 +44,6 @@ AC_CONFIG_FILES([Makefile
                  src/common/lib/pci/Makefile
 	         src/condump/Makefile
 	         src/poke/Makefile
+	         src/v4cat/Makefile
 		 ])
 AC_OUTPUT

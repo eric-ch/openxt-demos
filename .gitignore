@@ -24,6 +24,7 @@ src/common/include/stamp-h1
 src/common/lib/pci/libpci.a
 src/condump/condump
 src/poke/poke
+src/v4cat/v4cat
 
 *.o
 
